@@ -1,6 +1,8 @@
-export default async function handler(req) {
+export default async function onRequest(context) {
+  const { request, env } = context;
+
   // Handle CORS Preflight
-  if (req.method === 'OPTIONS') {
+  if (request.method === 'OPTIONS') {
     return new Response(null, {
       status: 204,
       headers: {
@@ -11,14 +13,16 @@ export default async function handler(req) {
     });
   }
 
-  const T_TOK = process.env.TELEGRAM_TOKEN;
-  const C_ID = process.env.CHAT_ID;
+  const T_TOK = env.TELEGRAM_TOKEN;
+  const C_ID = env.CHAT_ID;
+
+  // ... (rest of the code, just replace process.env with env)
   
-  const url = new URL(req.url);
+  const url = new URL(request.url);
   const action = url.searchParams.get('action');
 
   // 1. HANDLE GET REQUESTS (Polling)
-  if (req.method === 'GET') {
+  if (request.method === 'GET') {
     if (action === 'getUpdates') {
       const clientMsgId = parseInt(url.searchParams.get('messageId'));
       
@@ -60,10 +64,10 @@ export default async function handler(req) {
   }
 
   // 2. HANDLE POST REQUESTS
-  if (req.method === 'POST') {
+  if (request.method === 'POST') {
     let body;
     try {
-      body = await req.json();
+      body = await request.json();
     } catch (e) {
       return new Response('Missing Request Body', { status: 400 });
     }
