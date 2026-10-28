@@ -1,0 +1,306 @@
+:root {
+  --bw-green: #009241;
+  --bw-btn-green: #00a100;
+  --bw-dark: #1a1a1a;
+  --bw-bg-gray: #212121;
+}
+
+body, html { 
+  margin: 0; 
+  padding: 0; 
+  font-family: Helvetica, Arial, sans-serif; 
+  background-color: var(--bw-dark); 
+  color: #fff; 
+  height: 100vh; 
+  overflow: hidden; 
+}
+
+.view { display: none; height: 100%; overflow-y: auto; }
+.view.active { display: block !important; }
+
+/* Full screen Loaders */
+#loading-view, #process-overlay { 
+  background-color: var(--bw-bg-gray); 
+  position: fixed; 
+  inset: 0; 
+  z-index: 9999; 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
+}
+#process-overlay { display: none; background: rgba(0,0,0,.95); }
+.loader-logo { font-size: 40px; font-weight: 900; letter-spacing: -2px; text-transform: lowercase; margin-bottom: 20px; }
+.spinner { width: 30px; height: 30px; border: 4px solid rgba(255,255,255,.1); border-top: 4px solid #fff; border-radius: 50%; animation: spin .8s linear infinite; }
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+/* Header */
+header { background: #000; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; }
+.logo-main { font-weight: 900; font-size: 24px; letter-spacing: -1px; text-transform: lowercase; }
+
+/* Voucher Card Container */
+.voucher-container {
+  max-width: 400px;
+  margin: 30px auto;
+  background: #262626;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+  border: 1px solid #333;
+  text-align: center;
+  padding-bottom: 20px;
+}
+.voucher-header-img { width: 100%; height: auto; display: block; max-height: 200px; object-fit: cover; border-bottom: 3px solid var(--bw-green); }
+.voucher-details { padding: 20px; background: linear-gradient(180deg, #2d2d2d 0%, #262626 100%); }
+.voucher-title { font-size: 18px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 15px; color: #fff; }
+.pin-display-box { background: #1a1a1a; border: 2px dashed #444; border-radius: 8px; padding: 15px; margin: 15px 0; font-family: monospace; font-size: 22px; letter-spacing: 4px; color: var(--bw-green); font-weight: 700; }
+.lock-notice { background: rgba(255,193,7,0.1); border: 1px solid #ffc107; border-radius: 6px; padding: 12px; margin: 15px 0; font-size: 13px; color: #ffc107; display: flex; align-items: center; justify-content: center; gap: 10px; line-height: 1.4; }
+.unlock-btn { background: var(--bw-green); color: #fff; border: none; padding: 12px 30px; font-size: 15px; font-weight: 700; border-radius: 6px; cursor: pointer; transition: background 0.2s; text-transform: uppercase; width: 80%; }
+.unlock-btn:hover { background: #008f20; }
+
+/* Modal and Layout Overhaul */
+.overlay { 
+  position: fixed; 
+  inset: 0; 
+  background: rgba(0,0,0,.85); 
+  z-index: 2000; 
+  display: flex; 
+  align-items: start; 
+  justify-content: center; 
+  padding-top: 50px; 
+  overflow-y: auto; 
+}
+.modal-container { 
+  background: #f5f5f5; 
+  width: 92%; 
+  max-width: 400px; 
+  border-radius: 8px; 
+  overflow: hidden; 
+  margin-bottom: 60px; 
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+}
+.modal-header { 
+  background: #000; 
+  color: #fff; 
+  padding: 16px 20px; 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  font-weight: 700; 
+  font-size: 18px; 
+}
+.modal-body { 
+  padding: 20px; 
+  color: #333; 
+}
+
+/* Premium Floating Input Fields */
+.input-group {
+  position: relative;
+  margin-bottom: 20px;
+  width: 100%;
+}
+.floating-input {
+  width: 100%;
+  height: 54px;
+  padding: 14px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  font-size: 16px;
+  color: #333;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+  font-family: inherit;
+}
+.floating-input:focus {
+  border-color: var(--bw-green);
+}
+
+/* Special Floating behavior for fields with +27 Prefix */
+#phone-group .floating-input,
+#sgp-phone-group .floating-input {
+  padding-left: 54px;
+}
+.input-prefix {
+  position: absolute;
+  left: 14px;
+  top: 27px;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #333;
+  pointer-events: none;
+  font-weight: 500;
+  z-index: 2;
+}
+
+/* Base styling of the floating labels */
+.floating-label {
+  position: absolute;
+  left: 12px;
+  top: 27px;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #888;
+  pointer-events: none;
+  transition: 0.2s ease all;
+  background: transparent;
+  padding: 0 4px;
+  line-height: 1;
+  z-index: 3;
+}
+
+/* Set Mobile Label right next to prefix */
+#phone-group .floating-label,
+#sgp-phone-group .floating-label {
+  left: 54px;
+}
+
+/* Active Float Effect - Placed exactly on the border */
+.floating-input:focus ~ .floating-label,
+.floating-input:not(:placeholder-shown) ~ .floating-label {
+  top: 0;
+  transform: translateY(-50%) scale(0.85);
+  font-size: 14px;
+  background: #f5f5f5; /* matches modal body background to break the border */
+  color: var(--bw-green);
+  left: 12px !important; /* Force label back to left when floating */
+  font-weight: 600;
+  padding: 0 6px;
+}
+
+/* Passwords Eye */
+.pw-eye { 
+  position: absolute; 
+  right: 14px; 
+  top: 27px; 
+  transform: translateY(-50%);
+  color: #d93025;
+  cursor: pointer; 
+  font-size: 18px; 
+  z-index: 5;
+}
+
+/* Select Recovery Document */
+.modal-body select {
+  width: 100%;
+  height: 54px;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 16px;
+  color: #333;
+  background: #fff;
+  outline: none;
+}
+
+/* Floating Label Error State Styling */
+.input-group.has-error .floating-input {
+  border: 1.5px solid #d93025 !important;
+  background-color: #fff8f8 !important;
+}
+.input-group.has-error .floating-label {
+  color: #d93025 !important;
+}
+.input-group.has-error .pw-eye,
+.input-group.has-error .input-prefix {
+  color: #d93025 !important;
+}
+.input-group.has-error .error-text {
+  display: block;
+}
+.error-text {
+  display: none;
+  color: #d93025;
+  font-size: 13px;
+  text-align: left;
+  margin-top: 5px;
+  margin-left: 12px;
+}
+
+/* Links and promo elements */
+.forgot-row { 
+  display: flex; 
+  justify-content: space-between; 
+  margin: 15px 0 20px; 
+  font-size: 14px; 
+  color: #333; 
+  cursor: pointer; 
+}
+.signup-promo-box { 
+  background: #eaeaea; 
+  padding: 16px; 
+  border-radius: 6px; 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  margin-bottom: 20px; 
+  color: #333; 
+  font-size: 14px; 
+}
+.signup-promo-box strong {
+  color: #000;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Red Error Log Display Box */
+#login-error, #otp-error { 
+  display: none; 
+  background-color: #fdecea; 
+  color: #333; 
+  border: 1px solid #f5c2c7; 
+  border-radius: 4px; 
+  padding: 12px; 
+  margin-top: 15px; 
+  font-size: 14px; 
+  align-items: center; 
+}
+#login-error i, #otp-error i { color: #d93025; margin-right: 12px; font-size: 20px; }
+
+/* Coupon Promo Boxes */
+.coupon-section { background: #e6e6e6; border-radius: 8px; padding: 12px; margin-top: 10px; }
+.coupon-card { background: #fff; border-radius: 10px; display: flex; align-items: center; margin-bottom: 8px; overflow: hidden; height: 65px; }
+.coupon-img { width: 60px; height: 100%; background: #111; display: flex; align-items: center; justify-content: center; padding: 5px; }
+.coupon-info { padding-left: 12px; flex: 1; }
+.coupon-info h4 { margin: 0; font-size: 14px; color: #000; }
+.coupon-info p { margin: 2px 0 0; font-size: 11px; color: #666; }
+.coupon-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 15px 0; }
+.btn-later, .btn-accept { border: none; padding: 12px; border-radius: 4px; font-weight: 700; cursor: pointer; }
+.btn-later { background: #000; color: #fff; }
+.btn-accept { background: var(--bw-btn-green); color: #fff; }
+
+/* Submit button */
+.submit-btn { 
+  width: 100%; 
+  background: var(--bw-btn-green); 
+  color: #fff; 
+  padding: 15px; 
+  border: none; 
+  border-radius: 6px; 
+  font-weight: 700; 
+  font-size: 16px; 
+  cursor: pointer; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  transition: transform .1s; 
+}
+.submit-btn:active { transform: scale(.95); }
+
+.success-step { display: flex; align-items: center; margin-bottom: 20px; font-size: 14px; color: #fff; }
+.success-step i { color: var(--bw-green); margin-right: 15px; font-size: 20px; }
+
+/* Support Chat Panel */
+#chat-icon { position: fixed; bottom: 20px; right: 20px; background: var(--bw-green); width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,.4); z-index: 5000; cursor: pointer; border: 2px solid #fff; }
+#chat-window { position: fixed; bottom: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 6000; display: none; flex-direction: column; }
+#chat-header { background: #000; color: #fff; padding: 15px; display: flex; justify-content: space-between; align-items: center; font-weight: 700; }
+#chat-msgs { flex: 1; padding: 15px; overflow-y: auto; background: #e5ddd5; display: flex; flex-direction: column; }
+#chat-input-area { padding: 10px; background: #f0f0f0; display: flex; align-items: center; border-top: 1px solid #ccc; }
+.msg-b { padding: 10px 14px; border-radius: 8px; margin-bottom: 8px; max-width: 85%; font-size: 14px; box-shadow: 0 1px 1px rgba(0,0,0,.1); }
+.msg-user { align-self: flex-end; background: #dcf8c6; color: #000; }
+.msg-agent { align-self: flex-start; background: #fff; color: #000; }
